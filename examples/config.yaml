@@ -1,0 +1,24 @@
+seed: 42
+n_ticks: 50000
+tick_ns: 1000000      # 1 ms synthetic event clock
+depth: 5
+symbol: BTC-USD
+base_asset: BTC
+quote_asset: USD
+max_order_qty: 0.25
+min_order_qty: 0.001
+min_net_edge_bps: 1.0
+slippage_bps: 0.2
+risk_max_inventory_abs: 2.0
+risk_max_notional_per_trade: 20000.0
+starting_cash_usd: 1000000.0
+latency_decision_to_order_ns: 2000000   # 2 ms
+latency_exchange_ack_ns: 3000000        # 3 ms
+latency_jitter_ns: 1000000              # deterministic pseudo-random jitter
+venues:
+  coinbase:
+    taker_fee_bps: 4.0
+    maker_fee_bps: 1.0
+  binance:
+    taker_fee_bps: 2.0
+    maker_fee_bps: 0.8
