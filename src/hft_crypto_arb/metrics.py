@@ -58,6 +58,11 @@ def trades_frame(trades: Sequence[Trade]) -> pd.DataFrame:
                 "realized_pnl": t.realized_net_pnl,
                 "edge_decay": t.edge_decay,
                 "status": t.status,
+                "expected_edge_bps": trade.expected_edge_bps,
+                "realized_edge_bps": trade.realized_edge_bps,
+                "edge_decay_bps": trade.edge_decay_bps,
+                "edge_decay": trade.edge_decay,
+                "realized_pnl": trade.realized_net_pnl,
             }
             for t in trades
         ]

@@ -84,6 +84,11 @@ class ExecutionSimulator:
         )
 
         realized = (sell_notional - sell_fee) - (buy_notional + buy_fee)
+
+        expected_edge_bps = 10_000.0 * signal.expected_net_pnl / buy_notional
+        realized_edge_bps = 10_000.0 * realized / buy_notional
+        edge_decay_bps = expected_edge_bps - realized_edge_bps
+
         trade = Trade(
             signal_id=signal.signal_id,
             signal_ts_ns=signal.ts_ns,
@@ -95,6 +100,9 @@ class ExecutionSimulator:
             expected_net_pnl=signal.expected_net_pnl,
             realized_net_pnl=realized,
             edge_decay=signal.expected_net_pnl - realized,
+            expected_edge_bps=expected_edge_bps,
+            realized_edge_bps=realized_edge_bps,
+            edge_decay_bps=edge_decay_bps,
             status="FILLED" if abs(executed_qty - signal.qty) < 1e-9 else "PARTIAL",
         )
         if not portfolio.can_apply(buy_fill, sell_fill):

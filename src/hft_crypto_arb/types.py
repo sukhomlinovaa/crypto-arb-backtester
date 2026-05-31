@@ -69,20 +69,23 @@ class LegFill:
     fee: float
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Trade:
     signal_id: str
     signal_ts_ns: int
     fill_ts_ns: int
-    direction: Direction
+    direction: str
     qty: float
     buy_fill: LegFill
     sell_fill: LegFill
     expected_net_pnl: float
     realized_net_pnl: float
     edge_decay: float
+    expected_edge_bps: float
+    realized_edge_bps: float
+    edge_decay_bps: float
     status: str
-
+    
 
 @dataclass(frozen=True, slots=True)
 class MetricSummary:
