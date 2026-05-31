@@ -139,6 +139,26 @@ The default configuration is intentionally conservative. Many apparent opportuni
 }
 ```
 
+## Latency and cost sensitivity
+
+The default signal is profitable when execution is instantaneous, but the edge decays quickly once latency is introduced.
+
+| Scenario | Trades | Net PnL | Win rate | Avg expected edge | Avg edge decay |
+|---|---:|---:|---:|---:|---:|
+| Zero latency, no costs | 22,511 | 51,423 | 100.0% | 2.98 bps | 0.00 bps |
+| Zero latency, default costs | 842 | 1,630 | 100.0% | 2.53 bps | 0.00 bps |
+| Default latency, no costs | 26,523 | -14,642 | 34.2% | 3.05 bps | 3.77 bps |
+| Default latency, default costs | 842 | -4,486 | 1.0% | 2.53 bps | 9.49 bps |
+
+The main result is that signal-time arbitrage is not enough. The strategy remains profitable under zero latency and default costs, but becomes unprofitable once execution delay is introduced.
+
+The no-cost default-latency scenario trades much more often because removing costs changes the signal filter and admits many smaller, more fragile opportunities.
+
+![Latency vs net PnL](docs/figures/latency_vs_net_pnl.png)
+
+![Latency vs edge decay](docs/figures/latency_vs_edge_decay.png)
+
+
 ## Diagnostics
 
 ![Equity curve](docs/figures/equity_curve.png)
